@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<robot name="Manual" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+<xacro:property name="body_color" value="Gazebo/Silver" />
+<!-- property of base_link -->
+<xacro:property name="base_link_length" value="0.15"/>
+<xacro:property name="wheel_radius" value="0.05"/>
+
+<gazebo>
+	<plugin  name="diff_drive" filename="libgazebo_ros_diff_drive.so">
+		<robotNamespace>/</robotNamespace>
+		<commandTopic>/cmd_vel</commandTopic>
+		<odometryTopic>odom</odometryTopic>
+		<odometryFrame>odom</odometryFrame>
+		<robotBaseFrame>base_link</robotBaseFrame>
+		<publishWheelTF>false</publishWheelTF>
+		<publishOdomTF>true</publishOdomTF>
+    <alwaysOn>true</alwaysOn>
+		<publishWheelJointState>false</publishWheelJointState>
+		<legacyMode>true</legacyMode>
+		
+		<wheelSeparation>${wheel_radius}</wheelSeparation>
+		<wheelDiameter>${base_link_length}</wheelDiameter>
+		<wheelAcceleration>1.0</wheelAcceleration>
+		<wheelTorque>20.0</wheelTorque>
+		<updateRate>10.0</updateRate>
+		<leftJoint>WheelL_1</leftJoint>
+		<rightJoint>wheelR_1</rightJoint>
+	</plugin>
+
+</gazebo>
+
+
+<gazebo reference="base_link">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <kp value="10000000.0" />
+	<kd value="1.0" />
+  <fdir1 value="1 0 0"/>
+  <!-- <selfCollide>true</selfCollide> -->
+  <turnGravityOff>false</turnGravityOff>
+</gazebo>
+
+<gazebo reference="wheelR_1">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <kp value="10000000.0" />
+	<kd value="1.0" />
+  <fdir1 value="1 0 0"/>
+  <turnGravityOff>false</turnGravityOff>
+  <!-- <selfCollide>true</selfCollide> -->
+</gazebo>
+
+<gazebo reference="WheelL_1">
+  <material>${body_color}</material>
+  <kp value="10000000.0" />
+	<kd value="1.0" />
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <fdir1 value="1 0 0"/>
+  <turnGravityOff>false</turnGravityOff>
+  <!-- <selfCollide>true</selfCollide> -->
+</gazebo>
+
+</robot>

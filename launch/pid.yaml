@@ -1,0 +1,3 @@
+gazebo_ros_control/pid_gains:
+  WheelL_1: {p: 1.0, i: 0.2, d: 0.0}
+  wheelR_1: {p: 1.0, i: 0.2, d: 0.0}
